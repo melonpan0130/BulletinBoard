@@ -1,0 +1,21 @@
+<h1>게시글</h1>
+<ul>
+	<li th:each="article : ${articles}">
+		<a th:href="@{/articles/{id}(id=${article.id})}" th:text="${article.title}"></a>
+	</li>
+</ul>
+<div th:if="${count == 0}">
+	<p>게시글이 없습니다.</p>
+</div>
+
+<!-- 게시글이 있는 경우에만 하단의 페이지 이동용 링크 표시 -->
+<div th:unless="${count == 0}">
+	<ol>
+		<li style="display: inline" th:each="i : ${#numbers.sequence(1, count)}">
+			<a th:if="${order.equals('desc')}" th:href="@{/articles(page=${i}, order='desc')}" th:text="${i}"></a>
+			<a th:unless="${order.equals('desc')}" th:href="@{/articles(page=${i}, order='asc')}" th:text="${i}"></a>
+		</li>
+	</ol>
+</div>
+
+<a th:href="@{/articles/write}">글 쓰기</a>

@@ -1,0 +1,10 @@
+<h1>글 쓰기</h1>
+<form th:action="@{/articles}" method="POST">
+	<label>제목</label> <input type="text" name="title" /><br />
+	<label>작성자</label> <input type="text" name="writer" /><br />
+	<label>내용</label>
+	<textarea name="content" style="width: 100%; height: 200px;"></textarea><br />
+	<input type="submit" value="글 쓰기" />
+</form>
+
+<a th:href="@{/articles}">돌아가기</a>

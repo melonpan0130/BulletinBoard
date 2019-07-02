@@ -1,0 +1,25 @@
+<div th:if="${article != null}">
+    <!-- 게시글 내용 보여주기 -->
+    <h1 th:text="|제목 : ${article.title}|"></h1>
+    <span th:text="|작성자 : ${article.writer}|"></span><br />
+    <span>내용</span><br />
+    <pre th:text="${article.content}">
+    </pre>
+    <!-- 댓글 목록 보여주기 -->
+    <ol>
+        <li th:each="comment : ${article.comments}">
+            <span th:text="${comment.writer}"></span>
+            <pre th:text="${comment.content}"></pre>
+        </li>
+    </ol>
+    <!-- 게시글 관련 댓글 추가 -->
+    <form th:action="@{/articles/{id}/comments(id=${article.id})}" method="POST">
+        <label>글쓴이</label><br /><input type="text" name="writer" /><br />
+        <label>내용</label><br /><textarea name="content"></textarea><br />
+        <input type="submit" value="댓글 달기" />
+    </form>
+</div>
+
+<div th:unless="${article != null}">게시글 미존재.</div>
+
+<a th:href="@{/articles}">돌아가기</a>
